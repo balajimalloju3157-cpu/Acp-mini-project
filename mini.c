@@ -71,17 +71,37 @@ void drawLine(int row1, int col1, int row2, int col2)
 
 int main()
 {
+    int choice;
+
     initializeCanvas();
 
-    // Sample rectangle
-    drawRectangle(2, 5, 12, 6);
+    printf("===== MINI GRAPHICS EDITOR =====\n");
+    printf("1. Draw Vertical Line\n");
+    printf("2. Draw Horizontal Line\n");
+    printf("3. Draw Rectangle\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
 
-    // Sample horizontal line
-    drawLine(12, 2, 12, 20);
+    switch(choice)
+    {
+        case 1:
+            drawLine(2, 20, 15, 20);
+            break;
 
-    // Sample vertical line
-    drawLine(8, 30, 15, 30);
+        case 2:
+            drawLine(10, 5, 10, 30);
+            break;
 
+        case 3:
+            drawRectangle(2, 5, 12, 6);
+            break;
+
+        default:
+            printf("Invalid Choice!\n");
+            return 0;
+    }
+
+    printf("\nCanvas Output:\n\n");
     displayCanvas();
 
     return 0;
