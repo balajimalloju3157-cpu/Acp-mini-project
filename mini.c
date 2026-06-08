@@ -30,7 +30,7 @@ void displayCanvas()
     }
 }
 
-// Function to draw a rectangle
+// Function to draw rectangle
 void drawRectangle(int row, int col, int width, int height)
 {
     for(int i = row; i < row + height && i < ROWS; i++)
@@ -46,26 +46,58 @@ void drawRectangle(int row, int col, int width, int height)
     }
 }
 
-// Function to draw a horizontal or vertical line
+// Function to draw line
 void drawLine(int row1, int col1, int row2, int col2)
 {
-    if(row1 == row2) // Horizontal line
+    if(row1 == row2)
     {
         for(int j = col1; j <= col2 && j < COLS; j++)
         {
             canvas[row1][j] = '*';
         }
     }
-    else if(col1 == col2) // Vertical line
+    else if(col1 == col2)
     {
         for(int i = row1; i <= row2 && i < ROWS; i++)
         {
             canvas[i][col1] = '*';
         }
     }
-    else
+}
+
+// Function to draw triangle
+void drawTriangle(int row, int col, int height)
+{
+    for(int i = 0; i < height; i++)
     {
-        printf("Only horizontal and vertical lines are supported.\n");
+        canvas[row + i][col - i] = '*';
+        canvas[row + i][col + i] = '*';
+    }
+
+    for(int j = col - (height - 1); j <= col + (height - 1); j++)
+    {
+        canvas[row + height - 1][j] = '*';
+    }
+}
+
+// Function to draw a simple circle
+void drawCircle(int centerRow, int centerCol, int radius)
+{
+    for(int i = 0; i < ROWS; i++)
+    {
+        for(int j = 0; j < COLS; j++)
+        {
+            int dx = i - centerRow;
+            int dy = j - centerCol;
+
+            int dist = dx * dx + dy * dy;
+
+            if(dist >= radius * radius - radius &&
+               dist <= radius * radius + radius)
+            {
+                canvas[i][j] = '*';
+            }
+        }
     }
 }
 
@@ -79,6 +111,8 @@ int main()
     printf("1. Draw Vertical Line\n");
     printf("2. Draw Horizontal Line\n");
     printf("3. Draw Rectangle\n");
+    printf("4. Draw Triangle\n");
+    printf("5. Draw Circle\n");
     printf("Enter your choice: ");
     scanf("%d", &choice);
 
@@ -94,6 +128,14 @@ int main()
 
         case 3:
             drawRectangle(2, 5, 12, 6);
+            break;
+
+        case 4:
+            drawTriangle(2, 20, 6);
+            break;
+
+        case 5:
+            drawCircle(10, 20, 5);
             break;
 
         default:
